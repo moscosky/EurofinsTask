@@ -1,0 +1,65 @@
+﻿@section scripts{
+    <script src="~/Scripts/angular.js"></script>
+    <script src="~/Scripts/app.js"></script>
+}
+
+<div ng-app="EurofinsApp" class="row">
+    <div ng-controller="ProductController">
+        <div style="margin-top: 40px">
+            <button type="button" class="btn btn-primary" ng-click="onClickNew()">Create New Product</button>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">Id</th>
+                            <th scope="col">Name</th>
+                            <th scope="col">Description</th>
+                            <th scope="col">Price</th>
+                            <th scope="col">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-if="isNewClicked" ng-model="newProd">
+                            <td>null</td>
+                            <td>
+                                <input ng-model="newProd.Name" />
+                            </td>
+                            <td>
+                                <input ng-model="newProd.Description" />
+                            </td>
+                            <td>
+                                <input ng-model="newProd.Price" />
+                            </td>
+                            <td>
+                                <button type="button" class="btn btn-danger" ng-click="onClickAdd(newProd)">Add</button>
+                            </td>
+                        </tr>
+                        <tr ng-repeat="r in products">
+                            <td><span>{{r.Id}}</span></td>
+                            <td>
+                                <span ng-if="!r.isEditMode">{{r.Name}}</span>
+                                <input ng-if="r.isEditMode" ng-model="r.Name" />
+                            </td>
+                            <td>
+                                <span ng-if="!r.isEditMode">{{r.Description}}</span>
+                                <input ng-if="r.isEditMode" ng-model="r.Description" />
+                            </td>
+                            <td>
+                                <span ng-if="!r.isEditMode">{{r.Price}}</span>
+                                <input ng-if="r.isEditMode" ng-model="r.Price" />
+                            </td>
+                            <td>
+                                <button type="button" class="btn btn-primary" ng-if="!r.isEditMode" ng-click="onClickEdit(r)">Edit</button>
+                                <button type="button" class="btn btn-danger" ng-if="!r.isEditMode" ng-click="onClickDelete(r)">Delete</button>
+                                <button type="button" class="btn btn-primary" ng-if="r.isEditMode" ng-click="onClickUpdate(r)">Update</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

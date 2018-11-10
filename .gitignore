@@ -3,3 +3,6 @@
 ################################################################################
 
 /packages
+/EurofinsTask/bin
+/EurofinsTask/obj/Debug
+/.vs
